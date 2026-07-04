@@ -1,6 +1,16 @@
 # report-automation-engine
 This project is not just about automating reports. It is about understanding what makes a report meaningful, identifying which components can be standardized, and designing a scalable system without losing the value of expert knowledge.
 
+## Repository Structure
+
+This repository is organized into two complementary parts:
+
+### 📖 Design Notes
+The first part documents the observations, design principles, and architectural decisions behind meaningful reporting systems.
+
+### 💻 Prototype
+The second part demonstrates a lightweight implementation that applies those ideas using Python, HTML templates, and PDF generation.
+
 ## Why I Started This Project
 I started this project after repeatedly encountering manual reporting workflows that required significant effort to maintain consistency, formatting, and narrative quality. Instead of asking how to automate reports, I became more interested in understanding what actually makes a report meaningful.
 
