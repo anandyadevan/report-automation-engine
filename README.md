@@ -1,2 +1,2 @@
 # report-automation-engine
-A product case study exploring how manual narrative reporting workflows can be redesigned into scalable reporting systems through workflow analysis, configurable logic, reusable knowledge libraries, and lightweight automation.
+This project is not just about automating reports. It is about understanding what makes a report meaningful, identifying which components can be standardized, and designing a scalable system without losing the value of expert knowledge.
