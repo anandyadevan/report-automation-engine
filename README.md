@@ -1,16 +1,6 @@
 # report-automation-engine
 This project is not just about automating reports. It is about understanding what makes a report meaningful, identifying which components can be standardized, and designing a scalable system without losing the value of expert knowledge.
 
-## Repository Structure
-
-This repository is organized into two complementary parts:
-
-### 📖 Design Notes
-The first part documents the observations, design principles, and architectural decisions behind meaningful reporting systems.
-
-### 💻 Prototype
-The second part demonstrates a lightweight implementation that applies those ideas using Python, HTML templates, and PDF generation.
-
 ## Why I Started This Project
 I started this project after repeatedly encountering manual reporting workflows that required significant effort to maintain consistency, formatting, and narrative quality. Instead of asking how to automate reports, I became more interested in understanding what actually makes a report meaningful.
 
@@ -67,7 +57,6 @@ Rather than treating reporting as a single automation task, this layered approac
 These observations became the foundation for designing the prototype presented in this repository.
 
 ## Prototype Overview
-## Prototype Overview
 
 To demonstrate these observations, I built a lightweight prototype that transforms structured student assessment data into narrative reports.
 
@@ -92,14 +81,35 @@ E --> F
 
 The prototype is intentionally simple, using Python, HTML templates, and PDF generation to demonstrate how reporting systems can separate data processing, business logic, knowledge management, and presentation into independent components.
 
+### Outputs
+
+The prototype generates both HTML and PDF reports from structured educational data.
+
+Current capabilities include:
+
+- HTML report generation
+- PDF rendering using Playwright
+- Dynamic narrative generation
+- Configurable business rules
+- Batch report generation
+
 ### Dataset
 
 This prototype uses the **Student Performance Dataset** from Kaggle as demonstration data.
 
 The dataset contains student demographic information, academic performance, attendance, and behavioral indicators, making it suitable for illustrating how structured educational data can be transformed into narrative reports.
 
-Source:
-https://www.kaggle.com/datasets/nabeelqureshitiii/student-performance-dataset
+**Source:** [Student Performance Dataset (Kaggle)](https://www.kaggle.com/datasets/nabeelqureshitiii/student-performance-dataset)
+
+## Repository Structure
+
+This repository is organized into two complementary parts:
+
+### 📖 Design Notes
+The first part documents the observations, design principles, and architectural decisions behind meaningful reporting systems.
+
+### 💻 Prototype
+The second part demonstrates a lightweight implementation that applies those ideas using Python, HTML templates, and PDF generation.
 
 ## Future Opportunities
 This prototype intentionally focuses on a simple implementation using Excel, Python, HTML, and PDF generation. However, the broader opportunity extends far beyond report automation.
