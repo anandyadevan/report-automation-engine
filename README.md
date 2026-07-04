@@ -5,7 +5,10 @@ This project is not just about automating reports. It is about understanding wha
 I started this project after repeatedly encountering manual reporting workflows that required significant effort to maintain consistency, formatting, and narrative quality. Instead of asking how to automate reports, I became more interested in understanding what actually makes a report meaningful.
 
 ## Why Reporting Matters
-Reports are often the final product experienced by customers. Regardless of how sophisticated the underlying system is, users ultimately evaluate the quality of a product through the reports they read.
+
+> **A great system can still feel like a poor product if its reports fail to communicate its value.**
+
+Reports are often the final experience users have with a product. Regardless of how sophisticated the underlying technology is, people ultimately judge its value through the reports they read. A meaningful report does more than present information—it explains results, provides context, and supports better decision-making.
 
 ## Key Observations
 Throughout this project, I observed several recurring patterns that changed the way I think about reporting systems.
@@ -38,7 +41,16 @@ The goal of automation is not to replace expertise, but to reduce repetitive wor
 
 ### 5. Meaningful reporting systems are built layer by layer.
 
-Generating a PDF is only the final step of a reporting workflow. A meaningful reporting system is built through multiple layers—including data processing, business rules, knowledge management, and presentation—where each layer has a distinct responsibility within the overall architecture.
+Generating a PDF is only the final step of a reporting workflow. I observed that meaningful reports are not produced by a single process, but by several independent layers working together. Each layer answers a different design question and has a distinct responsibility within the overall reporting architecture.
+
+| Layer | Core Question | Responsibilities |
+|---|---|---|
+| **Data Processing** | *How should raw data be prepared?* | Validate data<br>Clean & transform<br>Structure datasets |
+| **Business Rules** | *When and how should information be shown?* | Conditions<br>Decision logic<br>Prioritization |
+| **Knowledge Library** | *How should insights be communicated?* | Narratives<br>Explanations<br>Recommendations |
+| **Presentation** | *How should users consume the report?* | Layout<br>Styling<br>HTML / PDF |
+
+Rather than treating reporting as a single automation task, this layered approach separates responsibilities into reusable components that are easier to maintain, extend, and integrate into larger reporting systems.
 
 ---
 
