@@ -57,15 +57,39 @@ Rather than treating reporting as a single automation task, this layered approac
 These observations became the foundation for designing the prototype presented in this repository.
 
 ## Prototype Overview
-This repository demonstrates a lightweight prototype that transforms structured student assessment data into narrative reports.
-Instead of focusing solely on PDF generation, the prototype separates the reporting process into several reusable components:
-- Data Processing
-- Business Rules
-- Knowledge Library
-- HTML Rendering
-- PDF Generation
+## Prototype Overview
 
-This modular approach makes each component easier to maintain, extend, and eventually integrate into larger internal systems.
+To demonstrate these observations, I built a lightweight prototype that transforms structured student assessment data into narrative reports.
+
+Rather than focusing solely on PDF generation, the prototype separates the reporting workflow into reusable layers that mirror the framework introduced above.
+
+```mermaid
+flowchart LR
+
+A[Student Assessment Dataset]
+B[Data Processing]
+C[Business Rules]
+D[Knowledge Library]
+E[HTML Renderer]
+F[PDF Report]
+
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+```
+
+The prototype is intentionally simple, using Python, HTML templates, and PDF generation to demonstrate how reporting systems can separate data processing, business logic, knowledge management, and presentation into independent components.
+
+### Dataset
+
+This prototype uses the **Student Performance Dataset** from Kaggle as demonstration data.
+
+The dataset contains student demographic information, academic performance, attendance, and behavioral indicators, making it suitable for illustrating how structured educational data can be transformed into narrative reports.
+
+Source:
+https://www.kaggle.com/datasets/nabeelqureshitiii/student-performance-dataset
 
 ## Future Opportunities
 This prototype intentionally focuses on a simple implementation using Excel, Python, HTML, and PDF generation. However, the broader opportunity extends far beyond report automation.
