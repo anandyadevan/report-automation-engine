@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Student Performance Report</title>
+
+<style>
+@page {
+    size: A4;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #e5e7eb;
+    font-family: Arial, sans-serif;
+    color: #111827;
+}
+
+.page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    padding: 18mm;
+    page-break-after: always;
+}
+
+.header {
+    border-bottom: 3px solid #111827;
+    padding-bottom: 14px;
+    margin-bottom: 22px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.subtitle {
+    color:#6b7280;
+    margin-top:6px;
+    font-size:11.5px;
+    line-height:1.5;
+    max-width:720px;
+}
+
+.portfolio {
+    margin-top:8px;
+    font-size:12px;
+    font-weight:600;
+    color:#111827;
+}
+
+.portfolio-contact {
+    margin-top:3px;
+    font-size:11px;
+    color:#6b7280;
+}
+
+.footer {
+    margin-top:24px;
+    border-top:1px solid #e5e7eb;
+    padding-top:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    font-size:10px;
+    color:#6b7280;
+}
+
+.footer-left {
+    font-weight:600;
+}
+
+.footer-right {
+    text-align:right;
+    line-height:1.5;
+}
+
+.profile-card {
+    background: #f3f4f6;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 22px;
+}
+
+.student-name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.student-id {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 6px;
+}
+
+.grade-row {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.grade {
+    font-size: 52px;
+    font-weight: 800;
+    color: #f59e0b;
+}
+
+.grade-label {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.grade-desc {
+    color: #4b5563;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.section {
+    margin-top: 22px;
+}
+
+.section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d1d5db;
+    padding-bottom: 8px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.metric-card {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.metric-label {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.metric-value {
+    margin-top: 6px;
+}
+
+.metric-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.metric-main {
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.metric-sub {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 400;
+    line-height: 2px;
+}
+
+.badge {
+    display: inline-block;
+    color: white;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.subject-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+.subject-table th,
+.subject-table td {
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.subject-table th {
+    background: #f9fafb;
+}
+
+.small-badge {
+    color: white;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+}
+
+.small-badge.high {
+    background: #16a34a;
+}
+
+.small-badge.average {
+    background: #f59e0b;
+}
+
+.small-badge.low {
+    background: #dc2626;
+}
+
+.summary-box {
+    background: #f9fafb;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.note-card {
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #111827;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    background: #ffffff;
+}
+
+.note-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.note-text {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.summary-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.summary-list li {
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+
+.summary-list li:last-child {
+    margin-bottom: 0;
+}
+
+.summary-list span {
+    color: #374151;
+}
+
+.plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+.plan-table-wrapper {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    margin-top: 8px;
+}
+
+.plan-table th:first-child {
+    border-top-left-radius:8px;
+}
+
+.plan-table th:last-child {
+    border-top-right-radius:8px;
+}
+
+.plan-table th,
+.plan-table td {
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    vertical-align: top;
+    padding:14px 12px;
+    font-size: 11.5px;
+}
+
+.plan-table th {
+    background: #111827;
+    color: white;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.plan-table tbody tr:nth-child(even) {
+    background: #f3f4f6;
+}
+
+.plan-table ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.plan-table li {
+    margin-bottom: 2px;
+    line-height:1.35;
+}
+
+.plan-status {
+    display: inline-block;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight:600;
+    white-space: nowrap;
+}
+
+.plan-status.urgent {
+    background: #dc2626;
+}
+
+.plan-status.opportunity {
+    background: #f59e0b;
+}
+
+.plan-status.maintain {
+    background: #16a34a;
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .page {
+        margin: 0;
+        width: 210mm;
+        min-height: 297mm;
+        page-break-after: always;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    
+        <div class="header">
+
+            <h1>Student Performance Report</h1>
+
+            <div class="subtitle">
+                End-to-end reporting pipeline powered by structured analytics,
+                knowledge libraries, and LLM-assisted interpretation.
+            </div>
+
+            <div class="portfolio">
+                Portfolio Project • Anandya Devan Alfarizky
+            </div>
+
+            <div class="portfolio-contact">
+                anandyadevan@gmail.com • linkedin.com/in/anandyadevan
+            </div>
+
+        </div>
+        
+
+    <div class="profile-card">
+        <div class="student-name">Satria Prameswari Permana</div>
+        <div class="student-id">Student ID: 43</div>
+
+        <div class="grade-row">
+            <div class="grade">C</div>
+            <div>
+                <div class="grade-label">Developing</div>
+                <div class="grade-desc">Demonstrates adequate performance with opportunities for further improvement.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <div class="summary-box">Satria Prameswari Permana achieved a final grade of C, categorized as Developing. Academic performance remains balanced across subjects with opportunities for continued improvement. Further development in attendance consistency, weekly study routines, and classroom participation would strengthen overall learning effectiveness. 7 targeted learning plans are recommended to support continued development.</div>
+    </div>
+
+    <div class="section">
+        <h2>Learning Habits</h2>
+        <div class="metric-grid">
+            
+    <div class="metric-card">
+        <div class="metric-label">Attendance</div>
+        <div class="metric-value">
+        <div class="metric-inline">
+            <span class="metric-main">76.5%</span>
+        </div>
+        </div>
+        <div class="badge" style="background:#dc2626">Low</div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-label">Weekly Study Hours</div>
+        <div class="metric-value">
+        <div class="metric-inline">
+            <span class="metric-main">14.2</span>
+        </div>
+        </div>
+        <div class="badge" style="background:#f59e0b">Average</div>
+    </div>
+    
+    <div class="metric-card">
+        <div class="metric-label">Class Participation</div>
+        <div class="metric-value">
+        <div class="metric-inline">
+            <span class="metric-main">6.1</span>
+            <span class="metric-sub">out of 10</span>
+        </div>
+        </div>
+        <div class="badge" style="background:#f59e0b">Average</div>
+    </div>
+    
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Subject Performance</h2>
+        <table class="subject-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Score</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr>
+            <td>Mathematics</td>
+            <td>65.5</td>
+            <td><span class="small-badge low">Low</span></td>
+        </tr>
+        
+        <tr>
+            <td>Science</td>
+            <td>67.7</td>
+            <td><span class="small-badge low">Low</span></td>
+        </tr>
+        
+        <tr>
+            <td>Language</td>
+            <td>61.4</td>
+            <td><span class="small-badge low">Low</span></td>
+        </tr>
+        
+        <tr>
+            <td>Social Studies</td>
+            <td>59.8</td>
+            <td><span class="small-badge low">Low</span></td>
+        </tr>
+        
+            </tbody>
+        </table>
+    </div>
+
+    
+    <div class="footer">
+        <div class="footer-left">
+            Page 1
+        </div>
+
+        <div class="footer-right">
+            <strong>Portfolio Project by Anandya Devan Alfarizky</strong><br>
+            anandyadevan@gmail.com • linkedin.com/in/anandyadevan
+        </div>
+    </div>
+    
+
+</div>
+
+</div>
+
+<div class="page">
+
+    
+        <div class="header">
+            <h1>Learning & Development Summary</h1>
+        </div>
+        
+
+    
+        <div class="section">
+            <h2>Focus Areas</h2>
+            
+    <div class="note-card">
+        <div class="note-title">Learning Habits</div>
+        <div class="note-text">
+            <ul class="summary-list">
+                
+        <li>
+            <strong>Attendance Consistency</strong><br>
+            <span>Enhancing attendance consistency would be beneficial to minimize potential learning disruptions.</span>
+        </li>
+        
+        <li>
+            <strong>Study Habit</strong><br>
+            <span>Maintains a foundational study routine, with opportunities to cultivate more robust learning habits.</span>
+        </li>
+        
+        <li>
+            <strong>Learning Participation</strong><br>
+            <span>Participates adequately in classroom activities and discussions, with potential for deeper engagement.</span>
+        </li>
+        
+            </ul>
+        </div>
+    </div>
+    
+    <div class="note-card">
+        <div class="note-title">Academic Performance</div>
+        <div class="note-text">
+            <ul class="summary-list">
+                
+        <li>
+            <strong>Mathematics</strong><br>
+            <span>Further practice would enhance the comprehension and application of mathematical concepts.</span>
+        </li>
+        
+        <li>
+            <strong>Science</strong><br>
+            <span>Conceptual understanding would be enhanced through engagement with practical examples.</span>
+        </li>
+        
+        <li>
+            <strong>Language</strong><br>
+            <span>Engagement in regular reading, vocabulary development, and consistent writing practice would foster language proficiency.</span>
+        </li>
+        
+        <li>
+            <strong>Social Studies</strong><br>
+            <span>Analytical thinking and the contextualization of concepts within real-world situations would benefit from further development.</span>
+        </li>
+        
+            </ul>
+        </div>
+    </div>
+    
+        </div>
+        
+    <div class="section learning-plan-section">
+        <h2>Learning Plan</h2>
+        <div class="plan-table-wrapper">
+            <table class="plan-table">
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>Plan</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <th>Success Indicator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td>Learning Habits</td>
+            <td>Improve attendance consistency</td>
+            <td><span class="plan-status urgent">Needs Attention</span></td>
+            <td><ul><li>Identify factors contributing to frequent absence.</li><li>Create a weekly attendance commitment plan.</li><li>Coordinate with teachers or parents when attendance issues arise.</li></ul></td>
+            <td>Attendance reaches at least 90%.</td>
+        </tr>
+        
+        <tr>
+            <td>Learning Habits</td>
+            <td>Develop stronger study habits</td>
+            <td><span class="plan-status opportunity">Suggested</span></td>
+            <td><ul><li>Maintain a consistent study schedule.</li><li>Increase focused study time gradually.</li><li>Review learning materials at the end of each week.</li></ul></td>
+            <td>Weekly study hours exceed 20 hours.</td>
+        </tr>
+        
+        <tr>
+            <td>Learning Habits</td>
+            <td>Increase active classroom engagement</td>
+            <td><span class="plan-status opportunity">Suggested</span></td>
+            <td><ul><li>Participate in at least one discussion each week.</li><li>Prepare questions before class.</li><li>Practice sharing opinions during learning activities.</li></ul></td>
+            <td>Participation score reaches 8 or above.</td>
+        </tr>
+        
+        <tr>
+            <td>Mathematics</td>
+            <td>Improve mathematical problem-solving ability</td>
+            <td><span class="plan-status urgent">Needs Attention</span></td>
+            <td><ul><li>Practice mathematics exercises three times per week.</li><li>Review incorrect answers and identify common mistakes.</li><li>Seek clarification on difficult concepts when needed.</li></ul></td>
+            <td>Mathematics score improves by at least 10 points.</td>
+        </tr>
+        
+        <tr>
+            <td>Science</td>
+            <td>Strengthen conceptual understanding in science</td>
+            <td><span class="plan-status urgent">Needs Attention</span></td>
+            <td><ul><li>Study key concepts systematically.</li><li>Practice applying concepts through exercises.</li><li>Use visual explanations and examples to reinforce learning.</li></ul></td>
+            <td>Science score improves by at least 10 points.</td>
+        </tr>
+        
+        <tr>
+            <td>Language</td>
+            <td>Improve language proficiency</td>
+            <td><span class="plan-status urgent">Needs Attention</span></td>
+            <td><ul><li>Read short passages three times per week.</li><li>Write short summaries after reading.</li><li>Review new vocabulary regularly.</li></ul></td>
+            <td>Language score improves by at least 10 points.</td>
+        </tr>
+        
+        <tr>
+            <td>Social Studies</td>
+            <td>Develop contextual analysis skills</td>
+            <td><span class="plan-status urgent">Needs Attention</span></td>
+            <td><ul><li>Practice summarizing concepts using mind maps.</li><li>Discuss social issues and relate them to learning materials.</li><li>Apply concepts to practical examples.</li></ul></td>
+            <td>Social Studies score improves by at least 10 points.</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    
+    <div class="footer">
+        <div class="footer-left">
+            Page 2
+        </div>
+
+        <div class="footer-right">
+            <strong>Portfolio Project by Anandya Devan Alfarizky</strong><br>
+            anandyadevan@gmail.com • linkedin.com/in/anandyadevan
+        </div>
+    </div>
+    
+
+</div>
+
+</body>
+</html>
