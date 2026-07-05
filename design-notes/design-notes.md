@@ -336,3 +336,495 @@ the design process starts with a different question:
 > **"What decisions should this report help the reader make?"**
 
 Only after those decision rules were clearly defined was the automation logic implemented in code.
+
+## 3. Knowledge Library
+
+After the Business Logic determines **what** should be communicated, the next challenge is deciding **how** it should be communicated.
+
+Raw classifications such as `High`, `Average`, or `Low` are not meaningful enough to be presented directly to parents, teachers, or students.
+
+Instead, every business outcome is translated into human-readable narratives through a Knowledge Library.
+
+```text
+Raw Data
+↓
+Business Logic
+↓
+Knowledge Library
+↓
+Personalized Narrative
+```
+
+Rather than hardcoding sentences throughout the codebase, all explanations are centralized into reusable knowledge components.
+
+This separation makes the report easier to maintain, extend, and improve without modifying the underlying business logic.
+
+---
+
+### Knowledge Components
+
+The prototype organizes the library into several categories, each serving a different purpose within the report.
+
+- Executive Summary
+- Positive Indicators
+- Focus Areas
+- Learning Plans
+- Growth Opportunities
+- Learning Observations
+
+Each component contains domain-specific explanations that correspond to the business rules defined in the previous layer.
+
+---
+
+### Narrative Mapping
+
+Instead of displaying classifications directly, each result is translated into a narrative.
+
+For example,
+
+```text
+Attendance = High
+```
+
+does not appear in the report as
+
+> Attendance: High
+
+Instead, it becomes a more meaningful explanation describing the student's learning behavior.
+
+Likewise,
+
+```text
+Class Participation = Low
+```
+
+is transformed into an observation explaining why classroom engagement may deserve additional attention.
+
+This approach shifts the report from simply presenting data to communicating understanding.
+
+---
+
+### Why a Knowledge Library?
+
+Separating knowledge from business logic provides several advantages.
+
+Business Logic only determines **what** should be shown.
+
+The Knowledge Library determines **how** that information should be explained.
+
+Because of this separation:
+
+- narratives can be improved without changing the decision rules,
+- different writing styles can be introduced,
+- multiple languages can be supported,
+- and explanations remain consistent throughout the report.
+
+---
+
+### Building the Library
+
+The initial knowledge library was written manually based on the intended interpretation of each business rule.
+
+This process involved translating educational concepts into clear and concise narratives that would be meaningful to parents and teachers.
+
+Although manually creating these explanations requires more effort initially, it produces a stable and reusable knowledge base that can be refined over time.
+
+---
+
+### LLM as a Knowledge Enhancement Layer
+
+Large Language Models (LLMs) can significantly improve the quality of the knowledge library.
+
+Rather than replacing the decision engine, an LLM can be used to enhance the narrative itself.
+
+Possible applications include:
+
+- improving wording and readability,
+- generating alternative sentence variations,
+- adapting the writing style for different audiences,
+- translating reports into multiple languages,
+- expanding concise explanations,
+- helping draft the initial knowledge library.
+
+In this architecture, the LLM acts as a **knowledge enhancement layer**, not as the primary decision maker.
+
+---
+
+### Future Direction: Dynamic Narrative Generation
+
+A future version of the engine could combine Business Logic with dynamic LLM generation.
+
+Instead of selecting a predefined explanation from the library, the system could generate personalized narratives using both the business outcomes and contextual information.
+
+The architecture would become:
+
+```text
+Business Logic
+↓
+Knowledge Library
+↓
+LLM Enhancement
+↓
+Dynamic Narrative
+```
+
+or, for fully dynamic generation,
+
+```text
+Business Logic
+↓
+Context + Knowledge
+↓
+LLM
+↓
+Personalized Narrative
+```
+
+This would allow every report to become more natural, unique, and context-aware while still remaining grounded in the predefined business rules.
+
+---
+
+### Why Dynamic LLM Was Not Used
+
+The current prototype intentionally relies on a rule-based knowledge library.
+
+Although dynamic LLM generation offers greater flexibility, it also introduces practical considerations such as:
+
+- API costs,
+- response time,
+- consistency,
+- reproducibility,
+- prompt engineering,
+- output validation.
+
+For a report automation engine, maintaining predictable and repeatable outputs is currently more important than maximizing linguistic variation.
+
+The modular architecture keeps the Knowledge Library independent, allowing dynamic LLM generation to be integrated in future iterations without redesigning the Business Logic.
+
+## 4. Presentation
+
+After determining **what** should be communicated (Business Logic) and **how** it should be explained (Knowledge Library), the final challenge is deciding **how the information should be presented**.
+
+The Presentation layer focuses on readability rather than aesthetics.
+
+The goal is to ensure that readers can understand the report quickly, identify the most important findings, and naturally progress toward the recommended actions.
+
+---
+
+### Information Hierarchy
+
+The report follows a deliberate reading sequence.
+
+```text
+Student Profile + Overall Grade
+        ↓
+Executive Summary
+        ↓
+Learning Habits
+        ↓
+Subject Performance
+        ↓
+Positive Indicators
+        ↓
+Focus Areas
+        ↓
+Learning Plan
+        ↓
+Growth Opportunities
+        ↓
+Learning Observations
+```
+
+This order mirrors how people typically process information.
+
+The report begins with context, continues with supporting evidence, highlights strengths before weaknesses, and concludes with recommendations and observations.
+
+---
+
+### Progressive Disclosure
+
+Not every piece of information should be presented at once.
+
+Instead, the report gradually reveals information.
+
+The reader first understands:
+
+> Who is the student?
+
+↓
+
+How is the student's overall performance?
+
+↓
+
+What evidence supports that conclusion?
+
+↓
+
+Which areas deserve attention?
+
+↓
+
+What actions should be taken?
+
+By progressively revealing information, the report becomes easier to follow and less cognitively demanding.
+
+---
+
+### Positive Before Improvement
+
+The report intentionally presents strengths before improvement areas.
+
+```text
+Positive Indicators
+        ↓
+Focus Areas
+        ↓
+Learning Plan
+```
+
+Starting with achievements creates a more balanced reading experience and provides context before discussing opportunities for improvement.
+
+The objective is not to avoid weaknesses, but to present them in a constructive sequence.
+
+---
+
+### Visual Prioritization
+
+Business Logic is also reflected visually.
+
+Each category is represented using consistent labels and colors.
+
+```text
+High
+        ↓
+Positive Label
+
+Average
+        ↓
+Suggested Label
+
+Low
+        ↓
+Needs Attention Label
+```
+
+These visual cues allow readers to identify important information without reading every paragraph in detail.
+
+---
+
+### Conditional Presentation
+
+The report avoids displaying unnecessary information.
+
+Sections such as:
+
+- Positive Indicators
+- Focus Areas
+- Learning Plan
+- Growth Opportunities
+- Learning Observations
+
+are generated only when relevant.
+
+Instead of displaying empty placeholders or generic statements, the report simply omits sections that do not provide value.
+
+This keeps every generated report concise and focused on meaningful insights.
+
+---
+
+### Dynamic Pagination
+
+Because every student's report contains different amounts of content, page length cannot be predetermined.
+
+The layout therefore applies pagination rules rather than relying on fixed page designs.
+
+Before rendering a new section, the engine checks whether sufficient space remains on the current page.
+
+```text
+Enough Space
+        ↓
+Continue Rendering
+
+Insufficient Space
+        ↓
+Move Section to Next Page
+```
+
+This prevents sections from being split awkwardly across pages and maintains a more natural reading experience.
+
+---
+
+### HTML-First Rendering
+
+The report is rendered in HTML before being exported to PDF.
+
+The HTML layout intentionally follows an A4 page structure so that the visual appearance remains consistent during PDF conversion.
+
+Designing in HTML also provides greater flexibility for styling, debugging, and future enhancements compared to generating PDF layouts directly.
+
+---
+
+### Design Philosophy
+
+The Presentation layer is not responsible for deciding **what** appears in the report.
+
+Instead, it determines **how readers experience the information**.
+
+A well-designed report is not defined by visual appearance alone, but by how effectively it communicates insights and supports decision-making.
+
+# Architecture Evolution: The Role of LLM
+
+The current prototype intentionally relies on a rule-based Knowledge Library to ensure that every generated report remains deterministic, consistent, and easy to validate.
+
+However, the architecture was designed to be modular from the beginning, allowing Large Language Models (LLMs) to be introduced without changing the overall reporting pipeline.
+
+Instead of acting as a single "report generator", an LLM can contribute at different layers depending on the desired objective.
+
+---
+
+## Stage 1 — Knowledge Generation
+
+The first opportunity is during the creation of the Knowledge Library itself.
+
+Rather than manually writing every explanation, recommendation, or observation pattern from scratch, an LLM can assist in generating the initial knowledge base.
+
+For example,
+
+```text
+Business Rule
+
+Attendance = High
+```
+
+↓
+
+LLM generates multiple narrative candidates
+
+↓
+
+Human review and refinement
+
+↓
+
+Knowledge Library
+
+This approach significantly accelerates library development while keeping the final knowledge base under human supervision.
+
+The resulting library becomes a reusable organizational asset instead of repeatedly generating the same explanations.
+
+---
+
+## Stage 2 — Knowledge Enhancement
+
+Once a Knowledge Library has been established, an LLM can further improve the quality of existing narratives.
+
+Rather than changing the Business Logic, the LLM focuses on improving how the information is communicated.
+
+Possible enhancements include:
+
+- improving readability,
+- generating alternative phrasings,
+- adapting writing tone,
+- simplifying explanations,
+- translating into multiple languages,
+- generating audience-specific versions (parents, teachers, school administrators),
+- standardizing writing consistency across the entire report.
+
+At this stage, the LLM functions as a language enhancement layer rather than a decision-making component.
+
+---
+
+## Stage 3 — Dynamic Narrative Generation
+
+The most advanced implementation is using an LLM to generate personalized narratives dynamically.
+
+Instead of retrieving predefined explanations from the Knowledge Library, the system provides structured context such as:
+
+- student profile,
+- overall performance,
+- business rule outcomes,
+- strengths,
+- focus areas,
+- learning plans,
+- learning observations.
+
+The LLM then synthesizes this information into a unique narrative while remaining grounded in the predefined Business Logic.
+
+```text
+Business Logic
+        │
+        ▼
+Student Context
+        │
+        ▼
+LLM
+        │
+        ▼
+Personalized Narrative
+```
+
+Unlike a fully prompt-driven system, the Business Logic continues to determine **what** should be communicated, while the LLM determines **how** that information is expressed.
+
+This separation helps preserve consistency, interpretability, and controllability.
+
+---
+
+## Why Rule-Based Logic Remains the Foundation
+
+Although dynamic LLM generation offers greater flexibility, the current prototype intentionally prioritizes a rule-based approach.
+
+A predefined Knowledge Library provides:
+
+- deterministic outputs,
+- consistent interpretations,
+- easier validation,
+- lower operational cost,
+- faster report generation,
+- predictable behavior across all reports.
+
+These characteristics are particularly important for reporting systems where consistency is often more valuable than linguistic variation.
+
+---
+
+## Long-Term Vision
+
+Rather than replacing existing components, the long-term direction is to progressively extend the architecture.
+
+```text
+Current Prototype
+
+Data Processing
+        │
+Business Logic
+        │
+Knowledge Library
+        │
+Presentation
+        │
+Automation
+```
+
+↓
+
+```text
+Future Architecture
+
+Data Processing
+        │
+Business Logic
+        │
+Knowledge Library
+        │
+LLM Layer
+        │
+Presentation
+        │
+Automation
+```
+
+The objective is not to build an "AI-generated report."
+
+The objective is to build a reporting engine where Business Logic provides consistency, Knowledge Library provides domain knowledge, and LLM enhances the quality and personalization of the final narrative.
+
+This layered architecture allows AI capabilities to evolve independently without requiring fundamental changes to the reporting pipeline.
