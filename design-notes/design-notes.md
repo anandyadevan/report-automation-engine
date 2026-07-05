@@ -238,9 +238,16 @@ If no subject reaches the defined threshold, the section is omitted.
 
 ### Learning Observations
 
-One of the most dynamic sections in the report is Learning Observations.
+Learning Observations is designed to identify meaningful contrasts between academic performance and learning habits.
 
-Instead of evaluating metrics independently, this section searches for meaningful relationships between different business entities.
+Unlike other sections that evaluate individual metrics, this section looks for specific combinations across multiple indicators to uncover learning patterns that may not be immediately visible.
+
+The current prototype focuses only on **High-Low** combinations involving:
+
+- Overall Grade
+- Attendance
+- Weekly Study Hours
+- Class Participation
 
 For example,
 
@@ -249,24 +256,48 @@ High Overall Grade
 +
 Low Class Participation
 ↓
-Learning Observation
+Generate Learning Observation
 ```
 
 or
 
 ```text
-High Attendance
+High Overall Grade
 +
-Average Subject Performance
+Low Weekly Study Hours
 ↓
-Learning Observation
+Generate Learning Observation
 ```
 
-These combinations help explain patterns that cannot be understood from individual metrics alone.
+These combinations may suggest that a student performs well academically despite showing relatively weak learning habits. Rather than treating this as a positive or negative outcome, the report presents it as an observation that may help parents or teachers better understand the student's learning characteristics.
 
-For example, a student who participates less in class but consistently achieves excellent grades may simply have a more independent learning style.
+Likewise, the opposite pattern is also considered.
 
-Likewise, strong learning habits accompanied by only average academic performance may indicate that additional support is needed despite good learning discipline.
+```text
+Low Overall Grade
++
+High Attendance
+↓
+Generate Learning Observation
+```
+
+or
+
+```text
+Low Overall Grade
++
+High Weekly Study Hours
+↓
+Generate Learning Observation
+```
+
+This may indicate that the student demonstrates strong learning discipline, but that these efforts have not yet translated into academic achievement. Such observations can encourage further discussion about learning strategies or additional support.
+
+Only High-Low combinations are used in the current design.
+
+Average-related combinations (such as High-Average or Average-Low) are intentionally excluded because they tend to produce less distinctive interpretations and often do not provide sufficiently meaningful insights for the reader.
+
+If none of the predefined High-Low patterns are detected, the Learning Observations section is omitted.
 
 This section demonstrates that the report is designed to interpret relationships between data rather than evaluate each metric in isolation.
 
