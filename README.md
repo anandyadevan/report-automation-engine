@@ -47,7 +47,7 @@ Generating a PDF is only the final step of a reporting workflow. I observed that
 |---|---|---|
 | **Data Processing** | *How should raw data be prepared?* | Validate data<br>Clean & transform<br>Structure datasets |
 | **Business Rules** | *When and how should information be shown?* | Conditions<br>Decision logic<br>Prioritization |
-| **Knowledge Library** | *How should insights be communicated?* | Narratives<br>Explanations<br>Recommendations |
+| **Knowledge Library** | *How should insights be communicated?* | Narratives<br>Explanations<br>Domain Knowledge |
 | **Presentation** | *How should users consume the report?* | Layout<br>Styling<br>HTML / PDF |
 
 Rather than treating reporting as a single automation task, this layered approach separates responsibilities into reusable components that are easier to maintain, extend, and integrate into larger reporting systems.
